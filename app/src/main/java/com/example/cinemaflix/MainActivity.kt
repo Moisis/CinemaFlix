@@ -5,10 +5,12 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 
 import com.example.cinemaflix.R
+
 import com.example.cinemaflix.fragments.HomeFragment
 import com.example.cinemaflix.fragments.SearchFragment
 import com.example.cinemaflix.fragments.SettingsFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
 
     private fun switchfragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
