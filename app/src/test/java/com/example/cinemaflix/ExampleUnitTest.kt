@@ -1,4 +1,4 @@
-package com.example.cinamaflix
+package com.example.cinemaflix
 
 import org.junit.Test
 
