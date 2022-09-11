@@ -31,7 +31,7 @@
         android:background="@color/Backgrounddark"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
 
-/>
+        />
 
 
 
