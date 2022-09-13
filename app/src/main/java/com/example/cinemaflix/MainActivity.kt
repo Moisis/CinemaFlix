@@ -2,45 +2,45 @@ package com.example.cinemaflix
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 
-import com.example.cinemaflix.R
-
-import com.example.cinemaflix.fragments.HomeFragment
-import com.example.cinemaflix.fragments.SearchFragment
-import com.example.cinemaflix.fragments.SettingsFragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cinemaflix.adapters.MovieAdapter
+import com.example.cinemaflix.api.ApiInterface
+import com.example.cinemaflix.api.MovieApiService
+import com.example.cinemaflix.models.Movie
+import com.example.cinemaflix.models.MovieResponse
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-
-    private val homefragment = HomeFragment()
-    private val searchfragment = SearchFragment()
-    private val settingsfragment = SettingsFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        switchfragment(homefragment)
-
-        bottom_navigation.setOnNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> switchfragment(homefragment)
-                R.id.search -> switchfragment(searchfragment)
-                R.id.settings -> switchfragment(settingsfragment)
-            }
-            true
+        rv_movies_list.layoutManager = LinearLayoutManager(this)
+        rv_movies_list.setHasFixedSize(true)
+        getMovieData { movies : List<Movie> ->
+            rv_movies_list.adapter = MovieAdapter(movies)
         }
+
 
     }
 
+    private fun getMovieData(callback: (List<Movie>) -> Unit){
+        val apiService = MovieApiService.getInstance().create(ApiInterface::class.java)
+        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
 
-    private fun switchfragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentholder, fragment)
-        transaction.commit()
+            }
 
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
+                return callback(response.body()!!.movies)
+            }
+
+        })
     }
 }
