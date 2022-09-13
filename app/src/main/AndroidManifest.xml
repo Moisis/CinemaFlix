@@ -16,7 +16,7 @@
         android:theme="@style/Theme.CinamaFlix"
         tools:targetApi="31">
         <activity
-            android:name=".MovieDetail"
+            android:name=".MovieDetailActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

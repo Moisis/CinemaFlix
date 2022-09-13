@@ -20,10 +20,15 @@ val poster : String?,
 val release : String?,
 
 @SerializedName("vote_average")
-val vote_average : String?
+val vote_average : String?,
 
 
+@SerializedName("overview")
+val overview: String?,
+
+@SerializedName("backdrop_path")
+val backdropPath: String
 
 ) : Parcelable {
-    constructor() :this("","","","","")
+    constructor() :this("","","","","","","")
 }

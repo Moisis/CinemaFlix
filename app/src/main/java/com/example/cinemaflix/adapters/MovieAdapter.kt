@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.cinemaflix.MovieDetail
+import com.example.cinemaflix.MovieDetailActivity
 import com.example.cinemaflix.R
 import com.example.cinemaflix.models.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
@@ -34,11 +34,11 @@ private val movies : List<Movie>
     override fun getItemCount(): Int = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bindMovie(movies.get(position))
+        holder.bindMovie(movies[position])
         holder.itemView.setOnClickListener{
             val context = holder.itemView.context
-            val intent =  Intent(context, MovieDetail::class.java)
-            intent.putExtra("Poster",movies.get(position).poster)
+            val intent =  Intent(context, MovieDetailActivity::class.java)
+            intent.putExtra("MovieId", movies[position].id)
             context.startActivity(intent)
         }
     }
