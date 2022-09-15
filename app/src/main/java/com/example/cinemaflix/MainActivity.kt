@@ -20,18 +20,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rv_movies_list.layoutManager = LinearLayoutManager(this)
-        rv_movies_list.setHasFixedSize(true)
-        getMovieData { movies: List<Movie> ->
-            rv_movies_list.adapter = MovieAdapter(movies)
-        }
-
 
         val textview1: TextView = findViewById(R.id.popular1)
         val textview2: TextView = findViewById(R.id.toprated)
         val textview3: TextView = findViewById(R.id.Upcoming)
 
+        rv_movies_list.layoutManager = LinearLayoutManager(this)
+        rv_movies_list.setHasFixedSize(true)
+        getMovieData { movies: List<Movie> ->
+            rv_movies_list.adapter = MovieAdapter(movies)
+        }
+        textview1.setTextColor(resources.getColor(R.color.logo))
+
         textview1.setOnClickListener {
+            textview1.setTextColor(resources.getColor(R.color.logo))
+            textview2.setTextColor(resources.getColor(R.color.secondarywhite))
+            textview3.setTextColor(resources.getColor(R.color.secondarywhite))
             rv_movies_list.layoutManager = LinearLayoutManager(this)
             rv_movies_list.setHasFixedSize(true)
             getMovieData { movies: List<Movie> ->
@@ -39,6 +43,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         textview2.setOnClickListener {
+            textview1.setTextColor(resources.getColor(R.color.secondarywhite))
+            textview2.setTextColor(resources.getColor(R.color.logo))
+            textview3.setTextColor(resources.getColor(R.color.secondarywhite))
+
             rv_movies_list.layoutManager = LinearLayoutManager(this)
             rv_movies_list.setHasFixedSize(true)
             getMovieData2 { movies: List<Movie> ->
@@ -46,6 +54,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         textview3.setOnClickListener {
+            textview1.setTextColor(resources.getColor(R.color.secondarywhite))
+            textview2.setTextColor(resources.getColor(R.color.secondarywhite))
+            textview3.setTextColor(resources.getColor(R.color.logo))
             rv_movies_list.layoutManager = LinearLayoutManager(this)
             rv_movies_list.setHasFixedSize(true)
             getMovieData3 { movies: List<Movie> ->
@@ -54,7 +65,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+
     }
+
 
     fun getMovieData(callback: (List<Movie>) -> Unit) {
         val apiService = MovieApiService.getInstance().create(ApiInterface::class.java)
@@ -100,3 +114,5 @@ class MainActivity : AppCompatActivity() {
         })
     }
 }
+
+

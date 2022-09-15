@@ -1,7 +1,6 @@
 package com.example.cinemaflix.adapters
 
 import android.content.Intent
-import android.os.Build.VERSION_CODES.S
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -71,6 +71,7 @@
             android:textAlignment="center"
            />
     </LinearLayout>
+
     <FrameLayout
         android:id="@+id/fragmentholder"
         android:layout_width="match_parent"
@@ -98,6 +99,12 @@
                 >
 
 
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pager1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_movies_list"
                     android:layout_width="match_parent"
@@ -106,6 +113,7 @@
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
 
                     tools:listitem="@layout/movie_item" />
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </FrameLayout>

@@ -1,6 +1,6 @@
 package com.example.cinemaflix
 
-import android.media.Image
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
