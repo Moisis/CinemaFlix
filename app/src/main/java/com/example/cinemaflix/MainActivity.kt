@@ -2,117 +2,47 @@ package com.example.cinemaflix
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.cinemaflix.adapters.MovieAdapter
-import com.example.cinemaflix.api.ApiInterface
-import com.example.cinemaflix.api.MovieApiService
-import com.example.cinemaflix.models.Movie
-import com.example.cinemaflix.models.MovieResponse
+import androidx.fragment.app.Fragment
+import com.example.cinemaflix.fragments.HomeFragment
+import com.example.cinemaflix.fragments.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 
 class MainActivity : AppCompatActivity() {
 
+    private val homefragment = HomeFragment()
+    private val searchfragment = SearchFragment()
+
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        switchfragment(homefragment)
 
-        val textview1: TextView = findViewById(R.id.popular1)
-        val textview2: TextView = findViewById(R.id.toprated)
-        val textview3: TextView = findViewById(R.id.Upcoming)
-
-        rv_movies_list.layoutManager = LinearLayoutManager(this)
-        rv_movies_list.setHasFixedSize(true)
-        getMovieData { movies: List<Movie> ->
-            rv_movies_list.adapter = MovieAdapter(movies)
-        }
-        textview1.setTextColor(resources.getColor(R.color.logo))
-
-        textview1.setOnClickListener {
-            textview1.setTextColor(resources.getColor(R.color.logo))
-            textview2.setTextColor(resources.getColor(R.color.secondarywhite))
-            textview3.setTextColor(resources.getColor(R.color.secondarywhite))
-            rv_movies_list.layoutManager = LinearLayoutManager(this)
-            rv_movies_list.setHasFixedSize(true)
-            getMovieData { movies: List<Movie> ->
-                rv_movies_list.adapter = MovieAdapter(movies)
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.home -> switchfragment(homefragment)
+                R.id.search -> switchfragment(searchfragment)
+                R.id.settings -> print("dsdf")
             }
+            true
         }
-        textview2.setOnClickListener {
-            textview1.setTextColor(resources.getColor(R.color.secondarywhite))
-            textview2.setTextColor(resources.getColor(R.color.logo))
-            textview3.setTextColor(resources.getColor(R.color.secondarywhite))
 
-            rv_movies_list.layoutManager = LinearLayoutManager(this)
-            rv_movies_list.setHasFixedSize(true)
-            getMovieData2 { movies: List<Movie> ->
-                rv_movies_list.adapter = MovieAdapter(movies)
-            }
-        }
-        textview3.setOnClickListener {
-            textview1.setTextColor(resources.getColor(R.color.secondarywhite))
-            textview2.setTextColor(resources.getColor(R.color.secondarywhite))
-            textview3.setTextColor(resources.getColor(R.color.logo))
-            rv_movies_list.layoutManager = LinearLayoutManager(this)
-            rv_movies_list.setHasFixedSize(true)
-            getMovieData3 { movies: List<Movie> ->
-                rv_movies_list.adapter = MovieAdapter(movies)
-            }
-        }
 
 
 
 
     }
 
+    private fun switchfragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragmentholder, fragment)
+        transaction.commit()
 
-    fun getMovieData(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(ApiInterface::class.java)
-        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-
-
-            }
-
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-
-                return callback(response.body()!!.movies)
-            }
-
-        })
     }
 
-    fun getMovieData2(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(ApiInterface::class.java)
-        apiService.getMovieList2().enqueue(object : Callback<MovieResponse> {
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
 
-            }
-
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                return callback(response.body()!!.movies)
-            }
-
-        })
-    }
-
-    fun getMovieData3(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(ApiInterface::class.java)
-        apiService.getMovieList3().enqueue(object : Callback<MovieResponse> {
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-
-            }
-
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                return callback(response.body()!!.movies)
-            }
-
-        })
-    }
 }
 
 

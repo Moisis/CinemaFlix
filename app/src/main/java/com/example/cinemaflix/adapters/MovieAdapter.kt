@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.cinemaflix.*
 import com.example.cinemaflix.models.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
+import kotlin.math.round
 
 class MovieAdapter(
 private val movies : List<Movie>
@@ -19,7 +20,8 @@ private val movies : List<Movie>
         fun bindMovie(movie : Movie){
             itemView.movie_title.text = movie.title
             itemView.movie_release_date.text = movie.release
-            itemView.rating.text = (movie.vote_average?.toFloat()!!/2).toString()
+            itemView.rating.text = String.format("%.1f",(movie.vote_average?.toFloat()!!/2))
+            //itemView.rating.text = (movie.vote_average?.toFloat()!!/2).toString()
             Glide.with(itemView).load(IMAGE_BASE + movie.poster).into(itemView.movie_poster)
         }
     }
