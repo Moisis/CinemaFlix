@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">CinamaFlix</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">CinemaFlix</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="actorascharname">As %s</string>
+    <string name="settings">Settings</string>
+    <string name="dark_mode">Dark Mode</string>
+
+
 </resources>
