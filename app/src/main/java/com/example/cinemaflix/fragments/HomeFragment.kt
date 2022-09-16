@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -43,6 +44,9 @@ class HomeFragment : Fragment() {
         val textview2 : TextView = view.findViewById(R.id.toprated)
         val textview3 : TextView = view.findViewById(R.id.Upcoming)
 
+
+
+
         textview1.setTextColor(resources.getColor(R.color.logo))
 
         rv_movies_list.layoutManager  = LinearLayoutManager(context)
@@ -57,6 +61,8 @@ class HomeFragment : Fragment() {
             textview1.setTextColor(resources.getColor(R.color.logo))
             textview2.setTextColor(resources.getColor(R.color.secondarywhite))
             textview3.setTextColor(resources.getColor(R.color.secondarywhite))
+            rv_movies_list.visibility =  View.GONE
+            progressBar2.visibility = View.VISIBLE
             rv_movies_list.layoutManager = LinearLayoutManager(this.activity)
             rv_movies_list.setHasFixedSize(true)
             getMovieData { movies: List<Movie> ->
@@ -67,7 +73,8 @@ class HomeFragment : Fragment() {
             textview1.setTextColor(resources.getColor(R.color.secondarywhite))
             textview2.setTextColor(resources.getColor(R.color.logo))
             textview3.setTextColor(resources.getColor(R.color.secondarywhite))
-
+            rv_movies_list.visibility =  View.GONE
+            progressBar2.visibility = View.VISIBLE
             rv_movies_list.layoutManager = LinearLayoutManager(this.activity)
             rv_movies_list.setHasFixedSize(true)
             getMovieData2 { movies: List<Movie> ->
@@ -78,6 +85,8 @@ class HomeFragment : Fragment() {
             textview1.setTextColor(resources.getColor(R.color.secondarywhite))
             textview2.setTextColor(resources.getColor(R.color.secondarywhite))
             textview3.setTextColor(resources.getColor(R.color.logo))
+            rv_movies_list.visibility =  View.GONE
+            progressBar2.visibility = View.VISIBLE
             rv_movies_list.layoutManager = LinearLayoutManager(this.activity)
             rv_movies_list.setHasFixedSize(true)
             getMovieData3 { movies: List<Movie> ->
@@ -99,9 +108,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-
-
-
+                progressBar2.visibility = View.GONE
+                rv_movies_list.visibility =  View.VISIBLE
                 return callback(response.body()!!.movies)
             }
 
@@ -119,7 +127,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-
+                rv_movies_list.visibility =  View.VISIBLE
+                progressBar2.visibility = View.GONE
                 return callback(response.body()!!.movies)
             }
 
@@ -137,7 +146,8 @@ class HomeFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-
+                progressBar2.visibility = View.GONE
+                rv_movies_list.visibility =  View.VISIBLE
                 return callback(response.body()!!.movies)
             }
 

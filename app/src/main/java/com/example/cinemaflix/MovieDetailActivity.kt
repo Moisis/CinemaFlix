@@ -1,11 +1,12 @@
 package com.example.cinemaflix
 
 
+import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.cinemaflix.adapters.ActorAdapter
@@ -66,6 +67,7 @@ class MovieDetailActivity : AppCompatActivity() {
         if (MovieIddata != null) {
             getactorlist1(MovieIddata) { actors: List<Actor> ->
                 rv_actors_list.adapter = ActorAdapter(actors)
+                progressBar3.visibility = View.GONE
             }
         }
 
@@ -84,7 +86,7 @@ private fun getactorlist1(movieid :Int,callback: (List<Actor>) -> Unit) {
         }
 
         override fun onFailure(call: Call<ActorListResponse>, t: Throwable) {
-            TODO("Not yet implemented")
+
         }
 
     })
