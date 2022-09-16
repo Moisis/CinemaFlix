@@ -58,12 +58,14 @@
 
     <FrameLayout
         android:id="@+id/fragmentholder"
-
         app:layout_constraintTop_toBottomOf="@id/view"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/Backgrounddark">
+        android:layout_height="0dp"
+        android:background="@color/Backgrounddark"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
 
 
         <androidx.core.widget.NestedScrollView
@@ -71,7 +73,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
-
 
             >
 
@@ -81,14 +82,11 @@
                 android:orientation="vertical">
 
 
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_movies_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/Backgrounddark"
-
-
                     tools:listitem="@layout/movie_item" />
 
             </LinearLayout>

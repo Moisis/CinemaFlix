@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.movie_item.view.*
 import kotlin.math.round
 
 class MovieAdapter(
-private val movies : List<Movie>
+    private val movies : List<Movie>
 ) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
 
     class MovieViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -21,7 +21,6 @@ private val movies : List<Movie>
             itemView.movie_title.text = movie.title
             itemView.movie_release_date.text = movie.release
             itemView.rating.text = String.format("%.1f",(movie.vote_average?.toFloat()!!/2))
-            //itemView.rating.text = (movie.vote_average?.toFloat()!!/2).toString()
             Glide.with(itemView).load(IMAGE_BASE + movie.poster).into(itemView.movie_poster)
         }
     }
@@ -45,6 +44,7 @@ private val movies : List<Movie>
             intent.putExtra(MOVIE_RATING, movies[position].vote_average)
             intent.putExtra(MOVIE_RELEASE_DATE, movies[position].release)
             intent.putExtra(MOVIE_OVERVIEW, movies[position].overview)
+            intent.putExtra(MOVIE_ID,movies[position].id)
             context.startActivity(intent)
         }
     }
