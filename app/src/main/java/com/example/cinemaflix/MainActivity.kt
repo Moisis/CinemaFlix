@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     private val homefragment = HomeFragment()
     private val searchfragment = SearchFragment()
-    private val settingsfragment = SettingsFragment()
+   // private val settingsfragment = SettingsFragment()
 
     
     override fun onCreate(savedInstanceState: Bundle?) {
