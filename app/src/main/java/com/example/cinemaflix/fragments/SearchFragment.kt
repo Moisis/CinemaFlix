@@ -54,6 +54,11 @@ class SearchFragment : Fragment() {
 
 
         })
+        searchview.setOnCloseListener {
+            progress.visibility = View.GONE
+            return@setOnCloseListener true
+        }
+
     }
 
 
