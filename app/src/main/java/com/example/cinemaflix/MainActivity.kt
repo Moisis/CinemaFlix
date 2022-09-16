@@ -26,7 +26,8 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> switchfragment(homefragment)
                 R.id.search -> switchfragment(searchfragment)
-                R.id.settings -> switchfragment(settingsfragment)
+                R.id.settings ->print("lol")
+                    //switchfragment(settingsfragment)
             }
             true
         }
