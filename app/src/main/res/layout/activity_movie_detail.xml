@@ -1,8 +1,9 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/moviedetail2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:fillViewport="true"
     tools:context=".MovieDetailActivity">
 
@@ -52,7 +53,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="sans-serif"
-            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,11 +93,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:numStars="5"
+            android:progressBackgroundTint="@color/logo"
+            android:progressTint="@color/logo"
             app:layout_constraintEnd_toEndOf="@+id/movie_poster_card"
             app:layout_constraintStart_toStartOf="@+id/movie_poster_card"
-            app:layout_constraintTop_toBottomOf="@+id/movie_poster_card"
-            android:numStars="5"
-            />
+
+            app:layout_constraintTop_toBottomOf="@+id/movie_poster_card" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_actors_list"
@@ -133,6 +135,19 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/movie_backdrop" />
+
+        <CheckBox
+            android:id="@+id/checkBoxfav"
+            android:layout_width="78dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="43dp"
+            android:button="@drawable/selector_bookmark"
+            android:buttonTint="@color/logo"
+            app:layout_constraintBottom_toTopOf="@+id/movie_overview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/movie_title"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

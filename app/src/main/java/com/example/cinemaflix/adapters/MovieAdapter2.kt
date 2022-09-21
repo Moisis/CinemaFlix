@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Glide.init
 import com.example.cinemaflix.*
+import com.example.cinemaflix.adapters.MovieAdapter.Companion.mutableList
+import com.example.cinemaflix.adapters.MovieAdapter.Companion.mutableList3
 import com.example.cinemaflix.fragments.PopularFragment
 import com.example.cinemaflix.models.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
@@ -22,16 +24,12 @@ import kotlinx.android.synthetic.main.movie_item.view.movie_title
 import kotlin.math.log
 
 
-class MovieAdapter(
+class MovieAdapter2(
     private var movies : List<Movie>
-) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
-    companion object {
-        val mutableList: MutableList<Movie> = mutableListOf()
-        val mutableList2: MutableList<Movie> = mutableListOf()
-        val mutableList3: MutableList<Movie> = mutableListOf()
-    }
+) : RecyclerView.Adapter<MovieAdapter2.MovieViewHolder>(){
+
 init {
-    mutableList.addAll( movies)
+    mutableList3.addAll( movies)
 
 }
 
@@ -53,28 +51,24 @@ init {
         )
     }
 
-    override fun getItemCount(): Int  = mutableList.size
+    override fun getItemCount(): Int  = mutableList3.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
 
-            holder.bindMovie(mutableList[position])
-            holder.itemView.setOnClickListener{
-                val context = holder.itemView.context
-                val intent =  Intent(context, MovieDetailActivity::class.java)
-                intent.putExtra(MOVIE_BACKDROP, mutableList[position].backdropPath)
-                intent.putExtra(MOVIE_POSTER,mutableList[position].poster)
-                intent.putExtra(MOVIE_TITLE, mutableList[position].title)
-                intent.putExtra(MOVIE_RATING, mutableList[position].vote_average)
-                intent.putExtra(MOVIE_RELEASE_DATE, mutableList[position].release)
-                intent.putExtra(MOVIE_OVERVIEW, mutableList[position].overview)
-                intent.putExtra(MOVIE_ID,mutableList[position].id)
-                intent.putExtra(MOVIE_checked,mutableList[position].id)
-                context.startActivity(intent)
-            }
+        holder.bindMovie(mutableList3[position])
+        holder.itemView.setOnClickListener{
+            val context = holder.itemView.context
+            val intent =  Intent(context, MovieDetailActivity::class.java)
+            intent.putExtra(MOVIE_BACKDROP, mutableList3[position].backdropPath)
+            intent.putExtra(MOVIE_POSTER,mutableList3[position].poster)
+            intent.putExtra(MOVIE_TITLE, mutableList3[position].title)
+            intent.putExtra(MOVIE_RATING, mutableList3[position].vote_average)
+            intent.putExtra(MOVIE_RELEASE_DATE, mutableList3[position].release)
+            intent.putExtra(MOVIE_OVERVIEW, mutableList3[position].overview)
+            intent.putExtra(MOVIE_ID,mutableList3[position].id)
+            context.startActivity(intent)
         }
-
-
-
+    }
 }
 
 

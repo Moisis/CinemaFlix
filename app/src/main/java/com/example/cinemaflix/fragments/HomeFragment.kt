@@ -11,149 +11,91 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.cinemaflix.MainActivity
 import com.example.cinemaflix.R
 import com.example.cinemaflix.adapters.MovieAdapter
 import com.example.cinemaflix.api.ApiInterface
 import com.example.cinemaflix.api.MovieApiService
 import com.example.cinemaflix.models.Movie
 import com.example.cinemaflix.models.MovieResponse
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class HomeFragment : Fragment() {
+class HomeFragment() : Fragment() {
 
-    val error : Fragment = ErrorFragment()
+
+
+
+    private val topratedfragment = TopRatedFragment()
+    private val popularFragment = PopularFragment()
+    private val nowPlayingFragment = NowPlayingFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-         return inflater.inflate(com.example.cinemaflix.R.layout.fragment_home, container, false)
+         return inflater.inflate(R.layout.fragment_home, container, false)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        switchfragment2(popularFragment)
 
 
-        val textview1 : TextView = view.findViewById(R.id.popular1)
-        val textview2 : TextView = view.findViewById(R.id.toprated)
-        val textview3 : TextView = view.findViewById(R.id.Upcoming)
+        val tabLayout :TabLayout = view.findViewById(R.id.tabhome)
 
 
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
+            override fun onTabSelected(tab: TabLayout.Tab) {
 
-        textview1.setTextColor(resources.getColor(R.color.logo))
+                when(tab.position){
+                    0->{switchfragment2(popularFragment)
+                         topratedfragment.onPause()
+                        nowPlayingFragment.onPause()
+                    }
+                    1->{switchfragment2(topratedfragment)
+                    popularFragment.onPause()
+                        nowPlayingFragment.onPause()
 
-        rv_movies_list.layoutManager  = LinearLayoutManager(context)
-        rv_movies_list.setHasFixedSize(true)
-        getMovieData { movies: List<Movie> ->
-            rv_movies_list.adapter = MovieAdapter(movies)
-        }
+                    }
+                    2->{switchfragment2(nowPlayingFragment)
+                        topratedfragment.onPause()
+                        popularFragment.onPause()
+                    }
 
-
-
-        textview1.setOnClickListener {
-            textview1.setTextColor(resources.getColor(R.color.logo))
-            textview2.setTextColor(resources.getColor(R.color.secondarywhite))
-            textview3.setTextColor(resources.getColor(R.color.secondarywhite))
-            rv_movies_list.visibility =  View.GONE
-            progressBar2.visibility = View.VISIBLE
-            rv_movies_list.layoutManager = LinearLayoutManager(this.activity)
-            rv_movies_list.setHasFixedSize(true)
-            getMovieData { movies: List<Movie> ->
-                rv_movies_list.adapter = MovieAdapter(movies)
-            }
-        }
-        textview2.setOnClickListener {
-            textview1.setTextColor(resources.getColor(R.color.secondarywhite))
-            textview2.setTextColor(resources.getColor(R.color.logo))
-            textview3.setTextColor(resources.getColor(R.color.secondarywhite))
-            rv_movies_list.visibility =  View.GONE
-            progressBar2.visibility = View.VISIBLE
-            rv_movies_list.layoutManager = LinearLayoutManager(this.activity)
-            rv_movies_list.setHasFixedSize(true)
-            getMovieData2 { movies: List<Movie> ->
-                rv_movies_list.adapter = MovieAdapter(movies)
-            }
-        }
-        textview3.setOnClickListener {
-            textview1.setTextColor(resources.getColor(R.color.secondarywhite))
-            textview2.setTextColor(resources.getColor(R.color.secondarywhite))
-            textview3.setTextColor(resources.getColor(R.color.logo))
-            rv_movies_list.visibility =  View.GONE
-            progressBar2.visibility = View.VISIBLE
-            rv_movies_list.layoutManager = LinearLayoutManager(this.activity)
-            rv_movies_list.setHasFixedSize(true)
-            getMovieData3 { movies: List<Movie> ->
-                rv_movies_list.adapter = MovieAdapter(movies)
-            }
-        }
-
-
-
-    }
-    fun getMovieData(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(ApiInterface::class.java)
-        apiService.getMovieList().enqueue(object : Callback<MovieResponse> {
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                val transaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragmentholder, error)
-                transaction.commit()
-
+                }
             }
 
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                progressBar2.visibility = View.GONE
-                rv_movies_list.visibility =  View.VISIBLE
-                return callback(response.body()!!.movies)
-            }
-
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-    }
 
-    fun getMovieData2(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(ApiInterface::class.java)
-        apiService.getMovieList2().enqueue(object : Callback<MovieResponse> {
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                val error : Fragment = ErrorFragment()
-                val transaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragmentholder, error)
-                transaction.commit()
-            }
 
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                rv_movies_list.visibility =  View.VISIBLE
-                progressBar2.visibility = View.GONE
-                return callback(response.body()!!.movies)
-            }
 
-        })
-    }
 
-    fun getMovieData3(callback: (List<Movie>) -> Unit) {
-        val apiService = MovieApiService.getInstance().create(ApiInterface::class.java)
-        apiService.getMovieList3().enqueue(object : Callback<MovieResponse> {
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-
-                val transaction = parentFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragmentholder, error)
-                transaction.commit()
-            }
-
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                progressBar2.visibility = View.GONE
-                rv_movies_list.visibility =  View.VISIBLE
-                return callback(response.body()!!.movies)
-            }
-
-        })
     }
 
 
+    private fun switchfragment2(fragment: Fragment) {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragmentholder2, fragment)
+            transaction.commit()
+
+    }
 
 }
+
+
+
+
+
+
+
+

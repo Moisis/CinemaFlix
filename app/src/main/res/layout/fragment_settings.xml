@@ -10,37 +10,36 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="355dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/settings"
-        android:textSize="48sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/secondary"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/favouritesicon"
+        android:textAlignment="center"
+        android:textColor="@color/ic_launcher_background"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/dark_mode_switch"
-        android:layout_width="297dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="28dp"
-        android:checked="true"
-        android:text="@string/dark_mode"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView3"
-        app:thumbTint="@color/logo"
-        app:trackTint="@color/primary" />
-
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="64dp"
-        android:src="@drawable/ic_baseline_brightness_medium_24"
-        app:layout_constraintEnd_toStartOf="@+id/dark_mode_switch"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        android:id="@+id/refresh"
+        android:layout_width="42dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_baseline_refresh_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/logo" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_movies_fav"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:listitem="@layout/movie_item"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
