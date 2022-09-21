@@ -5,12 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cinemaflix.R
 import com.example.cinemaflix.adapters.MovieAdapter
+import com.example.cinemaflix.adapters.MovieAdapter3
 import com.example.cinemaflix.api.ApiInterface
 import com.example.cinemaflix.api.MovieApiService
 import com.example.cinemaflix.models.Movie
@@ -33,19 +32,16 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val progress : ProgressBar = view.findViewById(R.id.progressBar)
-        progress.visibility = View.GONE
         val searchview: SearchView = view.findViewById(R.id.searchView)
         searchview.clearFocus()
         searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
                 getsearches(p0)
-                progress.visibility = View.GONE
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                progress.visibility = View.VISIBLE
+
                 clearsearches()
 
                 return false
@@ -54,12 +50,9 @@ class SearchFragment : Fragment() {
 
 
         })
-        searchview.setOnCloseListener {
-            progress.visibility = View.GONE
-            return@setOnCloseListener true
-        }
 
     }
+
 
 
 
@@ -73,7 +66,7 @@ class SearchFragment : Fragment() {
         rv_movies_search.setHasFixedSize(true)
         if (p0 != null) {
             getsearches1(p0){ movies: List<Movie> ->
-                rv_movies_search.adapter = MovieAdapter(movies) }}
+                rv_movies_search.adapter = MovieAdapter3(movies) }}
         else{
                 rv_movies_search.visibility = View.GONE
 

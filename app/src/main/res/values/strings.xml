@@ -7,6 +7,10 @@
     <string name="actorascharname">As %s</string>
     <string name="settings">Settings</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="homeicon">Home</string>
+    <string name="searchicon">Search</string>
+    <string name="favouritesicon">Favourites</string>
 
 
 </resources>
