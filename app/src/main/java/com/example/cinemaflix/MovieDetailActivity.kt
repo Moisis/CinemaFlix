@@ -110,6 +110,7 @@ companion object{
                 for (it in favmovies) {
                     if (it.id.equals(MovieIddata1)){
                         favmovies.remove(it)
+                        saveFavorite(favmovies)
                         break
                     }else{
                         continue

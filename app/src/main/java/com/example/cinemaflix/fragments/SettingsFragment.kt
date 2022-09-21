@@ -1,5 +1,6 @@
 package com.example.cinemaflix.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -30,17 +31,36 @@ class SettingsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-      loaddata()
-        rv_movies_fav.adapter = MovieAdapter4(favmovies.toList())
-        rv_movies_fav.layoutManager = LinearLayoutManager(activity)
-        rv_movies_fav.setHasFixedSize(true)
-
-        refresh.setOnClickListener {
+        loaddata()
+        if (favmovies.size==0){
+            rv_movies_fav.visibility = View.GONE
+            textView2.visibility = View.VISIBLE
+            textView2.text = "No Items Added"
+        }else {
+            loaddata()
+            textView2.visibility = View.GONE
+            rv_movies_fav.visibility = View.VISIBLE
             rv_movies_fav.adapter = MovieAdapter4(favmovies.toList())
             rv_movies_fav.layoutManager = LinearLayoutManager(activity)
             rv_movies_fav.setHasFixedSize(true)
+        }
+        refresh.setOnClickListener {
+            loaddata()
+            if (favmovies.size==0){
+                rv_movies_fav.visibility = View.GONE
+                textView2.visibility = View.VISIBLE
+                textView2.text = "No Items Added"
+            }else {
+                textView2.visibility = View.GONE
+                rv_movies_fav.visibility = View.VISIBLE
+                rv_movies_fav.adapter = MovieAdapter4(favmovies.toList())
+                rv_movies_fav.layoutManager = LinearLayoutManager(activity)
+                rv_movies_fav.setHasFixedSize(true)
+            }
+
         }
 
 

@@ -22,6 +22,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/logo"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+  />
+
     <ImageView
         android:id="@+id/refresh"
         android:layout_width="42dp"
@@ -38,8 +51,6 @@
         tools:listitem="@layout/movie_item"
         app:layout_constraintTop_toBottomOf="@id/textView3"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
