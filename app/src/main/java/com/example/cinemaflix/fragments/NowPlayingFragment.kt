@@ -1,6 +1,7 @@
 package com.example.cinemaflix.fragments
 
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +29,7 @@ class NowPlayingFragment() : Fragment() {
 
     val error : Fragment = ErrorFragment()
    private var pageid = 0
-
+    private var nowPlayingposition : Parcelable? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,7 +44,7 @@ class NowPlayingFragment() : Fragment() {
         var pastVisiblesItems: Int
         var visibleItemCount: Int
         var totalItemCount: Int
-        val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.activity)
+        val mLayoutManager  = LinearLayoutManager(this.activity)
         nowplaying_movies_list.layoutManager = mLayoutManager
         nowplaying_movies_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -52,7 +53,7 @@ class NowPlayingFragment() : Fragment() {
                     totalItemCount = mLayoutManager.itemCount
                     pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition()
                     if (visibleItemCount + pastVisiblesItems >= totalItemCount/2) {
-                        Toast.makeText(activity,"lol",Toast.LENGTH_SHORT)
+                        nowPlayingposition = mLayoutManager.onSaveInstanceState()
                         addnowplaying()
 
 
@@ -86,7 +87,7 @@ class NowPlayingFragment() : Fragment() {
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-
+                nowplaying_movies_list.layoutManager?.onRestoreInstanceState(nowPlayingposition)
              progressBar4.visibility = View.GONE
                 return callback(response.body()!!.movies)
             }

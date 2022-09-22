@@ -1,6 +1,7 @@
 package com.example.cinemaflix.fragments
 
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ class TopRatedFragment() : Fragment() {
 
     val error : Fragment = ErrorFragment()
   private  var pageid1 = 0
+    private var topratedposition : Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +45,7 @@ class TopRatedFragment() : Fragment() {
         var pastVisiblesItems: Int
         var visibleItemCount: Int
         var totalItemCount: Int
-        val mLayoutManager: LinearLayoutManager = LinearLayoutManager(this.activity)
+        val mLayoutManager = LinearLayoutManager(this.activity)
         toprated_movies_list.layoutManager = mLayoutManager
         toprated_movies_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -52,7 +54,7 @@ class TopRatedFragment() : Fragment() {
                     totalItemCount = mLayoutManager.itemCount
                     pastVisiblesItems = mLayoutManager.findFirstVisibleItemPosition()
                     if (visibleItemCount + pastVisiblesItems >= totalItemCount/2) {
-
+                        topratedposition = mLayoutManager.onSaveInstanceState()
                         addtoprated()
 
 
@@ -85,6 +87,7 @@ class TopRatedFragment() : Fragment() {
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 progressBar2.visibility = View.GONE
+                toprated_movies_list.layoutManager?.onRestoreInstanceState(topratedposition)
                 return callback(response.body()!!.movies)
             }
 
