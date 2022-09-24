@@ -31,7 +31,7 @@ class HomeFragment() : Fragment() {
 
 
     private val topratedfragment = TopRatedFragment()
-    private val popularFragment = PopularFragment()
+    private var popularFragment = PopularFragment()
     private val nowPlayingFragment = NowPlayingFragment()
 
     override fun onCreateView(
@@ -47,7 +47,6 @@ class HomeFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         switchfragment2(popularFragment)
 
-
         val tabLayout :TabLayout = view.findViewById(R.id.tabhome)
 
 
@@ -57,17 +56,14 @@ class HomeFragment() : Fragment() {
 
                 when(tab.position){
                     0->{switchfragment2(popularFragment)
-                         topratedfragment.onPause()
-                        nowPlayingFragment.onPause()
+
                     }
                     1->{switchfragment2(topratedfragment)
-                    popularFragment.onPause()
-                        nowPlayingFragment.onPause()
+
 
                     }
                     2->{switchfragment2(nowPlayingFragment)
-                        topratedfragment.onPause()
-                        popularFragment.onPause()
+
                     }
 
                 }

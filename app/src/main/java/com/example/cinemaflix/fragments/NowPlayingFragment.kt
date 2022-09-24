@@ -87,8 +87,8 @@ class NowPlayingFragment() : Fragment() {
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                nowplaying_movies_list.layoutManager?.onRestoreInstanceState(nowPlayingposition)
-             progressBar4.visibility = View.GONE
+                nowplaying_movies_list?.layoutManager?.onRestoreInstanceState(nowPlayingposition)
+             progressBar4?.visibility = View.GONE
                 return callback(response.body()!!.movies)
             }
 

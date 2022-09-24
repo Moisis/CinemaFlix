@@ -34,13 +34,11 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.search -> {
                     switchfragment(searchfragment)
-                    homefragment.onPause()
-                    settingsfragment.onPause()
+
 
                 }
                 R.id.favourites ->{switchfragment(settingsfragment)
-                    searchfragment.onPause()
-                    homefragment.onPause()
+
                 }
             }
             true

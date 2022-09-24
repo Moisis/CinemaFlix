@@ -83,8 +83,9 @@ class PopularFragment() : Fragment() {
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                progressBar2.visibility = View.GONE
-                popular_movies_list.layoutManager?.onRestoreInstanceState(popularposition)
+
+                progressBar2?.visibility = View.GONE
+                popular_movies_list?.layoutManager?.onRestoreInstanceState(popularposition)
                 return callback(response.body()!!.movies)
             }
 

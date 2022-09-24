@@ -86,8 +86,8 @@ class TopRatedFragment() : Fragment() {
             }
 
             override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                progressBar2.visibility = View.GONE
-                toprated_movies_list.layoutManager?.onRestoreInstanceState(topratedposition)
+                progressBar2?.visibility = View.GONE
+                toprated_movies_list?.layoutManager?.onRestoreInstanceState(topratedposition)
                 return callback(response.body()!!.movies)
             }
 
